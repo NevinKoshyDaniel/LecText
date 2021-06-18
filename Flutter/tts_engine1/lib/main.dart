@@ -10,7 +10,7 @@ class MyApp extends StatefulWidget {
   _MyAppState createState() => _MyAppState();
 }
 
-enum TtsState { playing, stopped, paused, continued }
+enum TtsState { playing, stopped }
 
 class _MyAppState extends State<MyApp> {
   FlutterTts flutterTts;
@@ -22,15 +22,12 @@ class _MyAppState extends State<MyApp> {
   bool isCurrentLanguageInstalled = false;
 
   String _newVoiceText =
-      "Hello this is Nevin. This is the place where the Data from each monument should be read out using FIreBase"; //the statements from the firebase string should be downloaded here
+      "Hello this is Nevin. This is the place where the Data from each monument should be read out using FireBase. I sincerly hope the fetching things works as intended"; //the statements from the firebase string should be downloaded here
 
   TtsState ttsState = TtsState.stopped;
 
   get isPlaying => ttsState == TtsState.playing;
   get isStopped => ttsState == TtsState.stopped;
-  get isPaused => ttsState == TtsState.paused;
-  get isContinued => ttsState == TtsState.continued;
-
   bool get isIOS => Platform.isIOS;
   bool get isAndroid => Platform.isAndroid;
 
@@ -69,22 +66,6 @@ class _MyAppState extends State<MyApp> {
       });
     });
 
-    if (isIOS) {
-      flutterTts.setPauseHandler(() {
-        setState(() {
-          print("Paused");
-          ttsState = TtsState.paused;
-        });
-      });
-
-      flutterTts.setContinueHandler(() {
-        setState(() {
-          print("Continued");
-          ttsState = TtsState.continued;
-        });
-      });
-    }
-
     flutterTts.setErrorHandler((msg) {
       setState(() {
         print("error: $msg");
@@ -120,11 +101,6 @@ class _MyAppState extends State<MyApp> {
   Future _stop() async {
     var result = await flutterTts.stop();
     if (result == 1) setState(() => ttsState = TtsState.stopped);
-  }
-
-  Future _pause() async {
-    var result = await flutterTts.pause();
-    if (result == 1) setState(() => ttsState = TtsState.paused);
   }
 
   @override
@@ -176,12 +152,6 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-  // void _onChange(String text) {
-  //   setState(() {
-  //     _newVoiceText = text;
-  //   });
-  // }
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -194,10 +164,9 @@ class _MyAppState extends State<MyApp> {
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      // _inputSection(),
-                      _btnSection(),
                       _engineSection(),
                       _futureBuilder(),
+                      _btnSection(),
                       _buildSliders()
                     ]))));
   }
@@ -229,39 +198,15 @@ class _MyAppState extends State<MyApp> {
           return Text('Loading Languages...');
       });
 
-  // Widget _inputSection() => Container(
-  //     alignment: Alignment.topCenter,
-  //     padding: EdgeInsets.only(top: 25.0, left: 25.0, right: 25.0),
-  //     child: TextField(
-  //       onChanged: (String value) {
-  //         _onChange(value);
-  //       },
-  //     ));
-
   Widget _btnSection() {
-    if (isAndroid) {
-      return Container(
-          padding: EdgeInsets.only(top: 50.0),
-          child:
-              Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-            _buildButtonRow(Colors.green, Colors.greenAccent, Icons.play_arrow,
-                'PLAY', _speak),
-            _buildButtonRow(Colors.red, Colors.redAccent, Icons.stop, 'STOP',
-                _stop), //pause button not implemented in the base package code.hence it could not be invoked
-          ]));
-    } else {
-      return Container(
-          padding: EdgeInsets.only(top: 50.0),
-          child:
-              Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-            _buildButtonRow(Colors.green, Colors.greenAccent, Icons.play_arrow,
-                'PLAY', _speak),
-            _buildButtonRow(
-                Colors.red, Colors.redAccent, Icons.stop, 'STOP', _stop),
-            _buildButtonRow(
-                Colors.blue, Colors.blueAccent, Icons.pause, 'PAUSE', _pause),
-          ]));
-    }
+    return Container(
+        padding: EdgeInsets.only(top: 50.0),
+        child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+          _buildButtonRow(Colors.green, Colors.greenAccent, Icons.play_arrow,
+              'PLAY', _speak),
+          _buildButtonRow(Colors.red, Colors.redAccent, Icons.stop, 'STOP',
+              _stop), //pause button not implemented in the base package code.hence it could not be invoked
+        ]));
   }
 
   Widget _enginesDropDownSection(dynamic engines) => Container(
@@ -328,32 +273,6 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-  // Widget _volume() {
-  //   return Slider(
-  //       value: volume,
-  //       onChanged: (newVolume) {
-  //         setState(() => volume = newVolume);
-  //       },
-  //       min: 0.0,
-  //       max: 1.0,
-  //       divisions: 10,
-  //       label: "Volume: $volume");
-  // }
-
-  // Widget _pitch() {
-  //   return Slider(
-  //     value: pitch,
-  //     onChanged: (newPitch) {
-  //       setState(() => pitch = newPitch);
-  //     },
-  //     min: 0.5,
-  //     max: 2.0,
-  //     divisions: 15,
-  //     label: "Pitch: $pitch",
-  //     activeColor: Colors.red,
-  //   );
-  // }
-
   Widget _rate() {
     return Slider(
       value: rate,
@@ -368,4 +287,3 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
-//notes to self... i think its probably better to have constant pitches
