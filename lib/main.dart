@@ -21,7 +21,10 @@ class MyApp extends StatelessWidget {
         ),
         StreamProvider<FirebaseUser>.value(
           initialData: null,
-          value: locator<AuthenticationServices>().fireBaseUserStream.stream.asBroadcastStream(),
+          value: locator<AuthenticationServices>()
+              .fireBaseUserStream
+              .stream
+              .asBroadcastStream(),
         ),
         StreamProvider<UserType>.value(
           initialData: UserType.UNKNOWN,
@@ -93,7 +96,6 @@ class OurSchoolApp extends StatelessWidget {
     //   return WelcomeScreen();
     // }
 
-
     if (Provider.of<bool>(context, listen: false)) {
       if (userType == UserType.STUDENT) {
         return Home();
@@ -103,9 +105,8 @@ class OurSchoolApp extends StatelessWidget {
     } else {
       return Home();
     }
-
-
-
   }
 }
 // MainDashboard();
+// error: src refspec master does not match any
+// error: failed to push some refs to 'origin'
