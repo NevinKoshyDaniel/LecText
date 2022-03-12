@@ -1,24 +1,11 @@
-# Our E School 
- [![HitCount](http://hits.dwyl.com/ketanchoyal/Our-E-School.svg)](http://hits.dwyl.com/ketanchoyal/Our-E-School)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://github.com/ketanchoyal/Our-E-School/pull/new/master)
-[![GitHub stars](https://img.shields.io/github/stars/ketanchoyal/Our-E-School.svg?style=social&label=Stars✯)](https://github.com/ketanchoyal/Our-E-School/stargazers/)
-## I open sourced this project because I wasn't got paid
-
-## PR's are always welcomed
-
+# LecText
 ### An open source project for school management
-
-### State Management: [Provider](https://pub.dev/packages/provider) + [Get_it](https://pub.dev/packages/get_it)
 
 ### MVVM(Model-View-(View)Model) Architecture
 
 ### Note: This app is not fully developed, it still has a lot of bugs and I'm still working on it (For now all the login data for parent, teacher and student are added manually in firestore)
 
-### [Web Portal](https://github.com/ketanchoyal/Our-E-School-Web-Portal) is under development.
-
-#### There are backend firebase functions too written in Typescript for some automation and some functions to make them work with web based project(future proof)
-
-Our E School is the app build for iOS and Android using Flutter.
+The app is build for iOS and Android using Flutter.
 
 It uses Firebase FireStore as Database and Firebase Storage.
 
@@ -40,37 +27,7 @@ It uses Firebase FireStore as Database and Firebase Storage.
 | ✔ |  | TimeTable
 ### and many more......
 
-## Screenshots
-
-<img src="https://github.com/ketanchoyal/Academic-Connect/raw/master/screenshots/Screenshot_1.png"/>
-
-<img src="https://github.com/ketanchoyal/Academic-Connect/raw/master/screenshots/Screenshot_2.png"/>
-
-## Database
-
-Database structure snapshot are [here](https://github.com/ketanchoyal/Academic-Connect/raw/master/DB%20Structure).
-
-A full database documentation will be created soon..
-
-## Server.dart 
-
-You need to create this and put in /core/ folder. \
-This File is necessary in order to make Cloud Functions work.
-
-```dart
-class Server {
-  static String baseUrl =
-      YOUR-CLOUD-FUNCTION-URL;
-  static String webApi = 'webApi/';
-  static String profileUpdate = 'profileupdate';
-  static String getProfileData = 'userdata';
-  static String postAnnouncement = 'postAnnouncement';
-  static String addAssignment = 'addAssignment';
-}
-```
-
-## Getting Started
-
+#
 This project is a starting point for a Flutter application.
 
 A few resources to get you started if this is your first Flutter project:
